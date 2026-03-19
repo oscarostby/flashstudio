@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -13,9 +13,10 @@ html {
 body {
   @apply bg-background text-foreground font-sans antialiased;
   background:
-    radial-gradient(circle at top left, rgba(186, 230, 253, 0.55), transparent 26%),
-    radial-gradient(circle at 90% 12%, rgba(254, 240, 138, 0.35), transparent 18%),
-    linear-gradient(180deg, #f8fbff 0%, #edf4fa 52%, #f8fbff 100%);
+    radial-gradient(circle at top, rgba(14, 165, 233, 0.15), transparent 25%),
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.16), transparent 18%),
+    linear-gradient(180deg, #040712 0%, #071120 40%, #02040c 100%);
+  min-height: 100vh;
 }
 
 body::before {
@@ -24,8 +25,21 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.38), transparent 32%),
-    radial-gradient(circle at center, transparent 55%, rgba(148, 163, 184, 0.06));
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 30%),
+    radial-gradient(circle at center, transparent 52%, rgba(148, 163, 184, 0.08));
+  mix-blend-mode: screen;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+  opacity: 0.24;
 }
 
 #root {
@@ -33,33 +47,20 @@ body::before {
   isolation: isolate;
 }
 
-.parallax-card {
-  transform: translate3d(0, 0, 0);
+img {
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.parallax-card-reverse {
-  transform: translate3d(0, 0, 0);
-}
-
-.parallax-panel,
-.parallax-banner {
-  transform: translate3d(0, 0, 0);
-}
-
-@media (min-width: 1024px) {
-  .parallax-card {
-    transform: translateY(-14px);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  .parallax-card-reverse {
-    transform: translateY(18px);
-  }
-
-  .parallax-panel {
-    transform: translateY(-10px);
-  }
-
-  .parallax-banner {
-    background-attachment: fixed;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
