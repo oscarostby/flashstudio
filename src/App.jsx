@@ -124,16 +124,15 @@ export default function App() {
             <div className="space-y-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/75 px-4 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700 backdrop-blur">
                 <Sparkles className="h-3.5 w-3.5" />
-                Light mode concept · film, photo & motion first
+                Film, photo & motion production
               </div>
 
               <div className="space-y-6">
                 <h1 className="max-w-5xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-slate-950 sm:text-6xl lg:text-7xl xl:text-[5.5rem]">
-                  A brighter, more cinematic Flash Studio with layered parallax and media-led storytelling.
+                  Flash Studio creates cinematic film, photography, and motion-led brand storytelling.
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-                  This redesign shifts the brand into light mode, gives imagery far more room to lead,
-                  and introduces depth through floating cards, scroll-friendly sections, and editorial spacing.
+                  From commercial shoots to branded documentaries, the studio pairs premium visuals with a clean, editorial presentation that keeps the work front and center.
                 </p>
               </div>
 
@@ -151,8 +150,8 @@ export default function App() {
 
               <div className="grid gap-3 sm:grid-cols-3">
                 <Stat value="5" label="core production services" />
-                <Stat value="Photo + video" label="front-and-center storytelling" />
-                <Stat value="Parallax" label="layered motion-inspired layout" />
+                <Stat value="Film + photo" label="production-first storytelling" />
+                <Stat value="Visual depth" label="editorial, media-led layout" />
               </div>
             </div>
 
@@ -190,9 +189,9 @@ export default function App() {
                 <Card className="p-5 sm:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary">Motion concept</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.32em] text-primary">Studio approach</p>
                       <p className="mt-3 text-lg font-semibold leading-7 text-slate-900">
-                        Airy surfaces, immersive imagery, and subtle depth cues instead of a heavy dark shell.
+                        Airy surfaces, immersive imagery, and subtle depth cues keep the focus on the work itself.
                       </p>
                     </div>
                     <div className="rounded-full bg-sky-50 p-3 text-sky-600">
@@ -217,9 +216,9 @@ export default function App() {
                     </video>
                     <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 via-transparent to-transparent" />
                     <div className="absolute bottom-0 left-0 p-6 text-white">
-                      <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/75">Video-led landing experience</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/75">Motion-first showcase</p>
                       <p className="mt-2 max-w-xs text-sm leading-6 text-white/85">
-                        A looping hero asset instantly signals motion, scale, and production value.
+                        Film and motion sit alongside photography to show the full range of Flash Studio output.
                       </p>
                     </div>
                   </div>
@@ -231,8 +230,8 @@ export default function App() {
           <section id="services" className="space-y-8">
             <SectionHeading
               eyebrow="Services"
-              title="Built to feel like a current production brand, not a static brochure."
-              text="The layout now treats every service like part of a visual system: cleaner hierarchy, softer surfaces, and cards that feel ready for deeper case studies or reels."
+              title="Production services for brands, campaigns, and broadcast storytelling."
+              text="Flash Studio combines film, photography, rental support, TV production, and workshops in one streamlined creative partner."
             />
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
@@ -259,8 +258,8 @@ export default function App() {
           <section id="work" className="space-y-8">
             <SectionHeading
               eyebrow="Selected work"
-              title="Way more photo and video based, with the visuals doing the selling."
-              text="The gallery leans into large-format imagery, short labels, confident type, and soft overlays so the work reads like a campaign presentation rather than a generic template grid."
+              title="Selected work led by imagery, motion, and strong visual direction."
+              text="Photography, motion, and campaign frames are given room to breathe so each project reads like a polished brand story."
             />
 
             <div className="grid auto-rows-[260px] gap-4 md:grid-cols-3">
@@ -284,15 +283,14 @@ export default function App() {
                 <div className="space-y-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">Creative direction</p>
                   <h3 className="text-3xl font-black leading-none tracking-[-0.05em] text-slate-950 md:text-4xl">
-                    Clean. Bright. Expensive-looking.
+                    Visual storytelling with a premium finish.
                   </h3>
                   <p className="max-w-2xl text-base leading-8 text-slate-600">
-                    The new art direction uses a sunlit palette, oversized photography, rounded editorial cards,
-                    and subtle parallax positioning to make the brand feel more contemporary and premium.
+                    Flash Studio balances clean presentation, large-format imagery, and subtle motion cues to let the portfolio speak with clarity and confidence.
                   </p>
                 </div>
                 <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                  Ready for case studies, reels, and campaign pages
+                  Case studies, reels, and campaigns
                   <MoveRight className="h-4 w-4" />
                 </div>
               </Card>
@@ -301,18 +299,16 @@ export default function App() {
 
           <section id="experience" className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
             <div className="parallax-panel rounded-[36px] border border-white/60 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(226,238,248,0.82))] p-8 shadow-[0_24px_80px_rgba(148,163,184,0.18)] backdrop-blur-xl lg:p-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">Parallax-inspired experience</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">Studio experience</p>
               <h2 className="mt-4 text-4xl font-black leading-[0.95] tracking-[-0.05em] text-slate-950 md:text-5xl">
-                The page now has depth, pacing, and a stronger sense of motion.
+                A homepage with depth, pacing, and a strong sense of motion.
               </h2>
               <div className="mt-6 space-y-5 text-base leading-8 text-slate-600">
                 <p>
-                  Instead of stacking dense dark cards, this concept uses offset media blocks, brighter negative space,
-                  and translucent panels that create a modern parallax feel without needing heavy scripting.
+                  Offset media blocks, bright negative space, and translucent panels create a polished browsing experience that feels cinematic without becoming heavy.
                 </p>
                 <p>
-                  That makes the homepage feel more premium immediately and gives Flash Studio a clearer path toward
-                  future reels, hover interactions, and more advanced motion work.
+                  The result is a site that showcases Flash Studio as an established production company with room to expand into future reels, case studies, and richer motion work.
                 </p>
               </div>
             </div>
@@ -328,7 +324,7 @@ export default function App() {
                 >
                   <div className="max-w-sm text-white">
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-white/80">Scroll depth</p>
-                    <h3 className="mt-2 text-2xl font-bold">A travel-campaign mood with softer, lighter UI.</h3>
+                    <h3 className="mt-2 text-2xl font-bold">Campaign energy with a light, polished interface.</h3>
                   </div>
                 </div>
               </Card>
@@ -338,14 +334,14 @@ export default function App() {
                   <MapPin className="h-5 w-5 text-primary" />
                   <h3 className="mt-4 text-xl font-bold text-slate-900">Sandvika base, global feel</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-600">
-                    Contact details stay visible, but the presentation now feels international and campaign-ready.
+                    Based in Sandvika, Flash Studio presents work with an international, campaign-ready perspective.
                   </p>
                 </Card>
                 <Card className="p-6">
                   <MonitorPlay className="h-5 w-5 text-primary" />
-                  <h3 className="mt-4 text-xl font-bold text-slate-900">Future reel-ready layout</h3>
+                  <h3 className="mt-4 text-xl font-bold text-slate-900">Reel-friendly layout</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-600">
-                    The sections can easily expand into video embeds, featured projects, and service-specific showcases.
+                    Each section supports future video embeds, featured projects, and deeper service showcases.
                   </p>
                 </Card>
               </div>
@@ -359,11 +355,10 @@ export default function App() {
                 <div className="space-y-5">
                   <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">Contact</p>
                   <h2 className="max-w-3xl text-4xl font-black leading-[0.95] tracking-[-0.05em] text-slate-950 md:text-5xl">
-                    Ready to turn Flash Studio into a lighter, more modern visual showcase?
+                    Ready to plan your next Flash Studio production?
                   </h2>
                   <p className="max-w-2xl text-base leading-8 text-slate-600">
-                    This concept is designed to feel more premium on first load, more media-led throughout,
-                    and more prepared for future film reels, campaign pages, and motion interactions.
+                    Get in touch to discuss film production, photography, branded content, rental support, or workshops with the Flash Studio team.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <a href="mailto:post@flashstudio.no">
