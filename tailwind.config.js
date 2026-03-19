@@ -4,36 +4,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: 'rgba(255,255,255,0.1)',
-        input: 'rgba(255,255,255,0.12)',
-        ring: '#7be7ff',
-        background: '#060b14',
-        foreground: '#f5f7fb',
+        border: 'rgba(203,213,225,0.65)',
+        input: 'rgba(255,255,255,0.82)',
+        ring: '#0ea5e9',
+        background: '#f8fbff',
+        foreground: '#0f172a',
         primary: {
-          DEFAULT: '#7be7ff',
-          foreground: '#05111d',
+          DEFAULT: '#0ea5e9',
+          foreground: '#f8fbff',
         },
         secondary: {
-          DEFAULT: 'rgba(255,255,255,0.06)',
-          foreground: '#f5f7fb',
+          DEFAULT: 'rgba(255,255,255,0.88)',
+          foreground: '#0f172a',
         },
         muted: {
-          DEFAULT: 'rgba(255,255,255,0.06)',
-          foreground: '#9fb1c8',
+          DEFAULT: 'rgba(241,245,249,0.92)',
+          foreground: '#64748b',
         },
         card: {
-          DEFAULT: 'rgba(10, 18, 31, 0.78)',
-          foreground: '#f5f7fb',
+          DEFAULT: 'rgba(255,255,255,0.78)',
+          foreground: '#0f172a',
         },
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 30px 80px rgba(0,0,0,0.45)',
+        glow: '0 30px 90px rgba(148, 163, 184, 0.18)',
       },
       backgroundImage: {
-        'hero-grid': 'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
+        'hero-grid': 'linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)',
       },
     },
   },
