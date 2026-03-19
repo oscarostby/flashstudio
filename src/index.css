@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -13,11 +13,11 @@ html {
 body {
   @apply bg-background text-foreground font-sans antialiased;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.98), transparent 26%),
-    radial-gradient(circle at 18% 18%, rgba(191, 219, 254, 0.7), transparent 18%),
-    radial-gradient(circle at 82% 12%, rgba(224, 242, 254, 0.85), transparent 20%),
-    linear-gradient(180deg, #f9fcff 0%, #eef5fb 42%, #e6eff7 100%);
-  color: #0f172a;
+    radial-gradient(circle at top, rgba(15, 23, 42, 0.82), transparent 22%),
+    radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.12), transparent 18%),
+    radial-gradient(circle at 82% 12%, rgba(217, 70, 239, 0.12), transparent 22%),
+    linear-gradient(180deg, #030816 0%, #07111f 42%, #0a1d2f 100%);
+  color: #f8fafc;
   min-height: 100vh;
 }
 
@@ -27,8 +27,9 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 32%),
-    radial-gradient(circle at center, transparent 54%, rgba(148, 163, 184, 0.08));
+    radial-gradient(circle at 10% 10%, rgba(125, 211, 252, 0.08), transparent 16%),
+    radial-gradient(circle at 90% 18%, rgba(251, 191, 36, 0.05), transparent 18%),
+    radial-gradient(circle at 50% 50%, transparent 48%, rgba(15, 23, 42, 0.24));
   mix-blend-mode: screen;
 }
 
@@ -38,11 +39,11 @@ body::after {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(191, 219, 254, 0.18) 1px, transparent 1px);
-  background-size: 120px 120px;
-  mask-image: radial-gradient(circle at center, black, transparent 78%);
-  opacity: 0.35;
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 130px 130px;
+  mask-image: radial-gradient(circle at center, black, transparent 82%);
+  opacity: 0.22;
 }
 
 #root {
@@ -59,26 +60,44 @@ img {
   will-change: transform;
 }
 
-.snowfall {
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.95) 0 2px, transparent 2.5px),
-    radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.9) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 32% 66%, rgba(255, 255, 255, 0.9) 0 2px, transparent 2.6px),
-    radial-gradient(circle at 64% 54%, rgba(255, 255, 255, 0.78) 0 1.5px, transparent 2.2px),
-    radial-gradient(circle at 48% 36%, rgba(186, 230, 253, 0.55) 0 3px, transparent 3.5px),
-    radial-gradient(circle at 88% 72%, rgba(255, 255, 255, 0.82) 0 2px, transparent 2.6px);
-  animation: snowfall-drift 18s linear infinite;
+.page-aurora {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.16), transparent 22%),
+    radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.14), transparent 20%),
+    radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.1), transparent 24%);
+  filter: blur(4px);
 }
 
-@keyframes snowfall-drift {
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 90px 90px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 92%);
+}
+
+.light-orbs {
+  background:
+    radial-gradient(circle at 12% 22%, rgba(103, 232, 249, 0.08), transparent 12%),
+    radial-gradient(circle at 78% 18%, rgba(192, 132, 252, 0.08), transparent 14%),
+    radial-gradient(circle at 72% 78%, rgba(251, 191, 36, 0.09), transparent 14%);
+  animation: pulse-drift 16s ease-in-out infinite alternate;
+}
+
+.gradient-web {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.09), transparent 36%),
+    repeating-linear-gradient(125deg, rgba(125, 211, 252, 0.2) 0 2px, transparent 2px 76px),
+    repeating-linear-gradient(55deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 64px);
+  mask-image: radial-gradient(circle at center, black, transparent 88%);
+}
+
+@keyframes pulse-drift {
   0% {
-    transform: translate3d(0, -1.5%, 0);
-  }
-  50% {
-    transform: translate3d(-1%, 1.5%, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    transform: translate3d(1%, 4%, 0);
+    transform: translate3d(0, -2%, 0) scale(1.06);
   }
 }
 
