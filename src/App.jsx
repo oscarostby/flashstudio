@@ -13,65 +13,68 @@ import {
 } from 'lucide-react'
 import { Button } from './components/ui/button'
 
-const transitions = [
+const scenes = [
   {
     id: 'night',
-    label: 'Nightfall',
-    season: 'Midnight reveal',
-    title: 'Open on a deep midnight horizon with silent motion, glacial light, and a slow cinematic push forward.',
-    text: 'The first impression feels like a premium title sequence: dark contrast, glowing atmospherics, and depth that drifts around the copy instead of sitting still.',
+    kicker: 'Act I · Nightfall',
+    season: 'Night',
+    title: 'Start with a slow-burn horizon, restrained typography, and a camera move that feels expensive.',
+    text: 'Dark contrast, cold bloom, and drifting motion layers establish a film-opening mood without falling back into boxed UI blocks.',
     image:
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80',
     alt: 'Night landscape with dramatic sky',
-    accent: 'from-indigo-400/70 via-cyan-300/35 to-transparent',
-    surface: 'bg-[linear-gradient(180deg,rgba(5,10,28,0.42),rgba(2,6,23,0.76))]',
+    accent: 'from-cyan-300/40 via-sky-200/12 to-transparent',
+    surface: 'from-slate-950/30 via-slate-950/58 to-slate-950/92',
     icon: MoonStar,
-    speed: 0.12,
+    speed: 0.16,
+    align: 'items-start text-left',
   },
   {
     id: 'winter',
-    label: 'Snow drift',
-    season: 'Winter crossing',
-    title: 'The world cools without a cut, drifting into crystal haze, white pressure, and softer blue diffusion.',
-    text: 'Instead of loading a new block, the whole environment bends into a fresh tone so the scroll feels directed, natural, and expensive.',
+    kicker: 'Act II · Whiteout',
+    season: 'Winter',
+    title: 'Let the page drift into bright pressure, softer haze, and a glacial mid-film transition.',
+    text: 'Instead of introducing cards, the layout keeps everything in open editorial space so the story breathes while the background keeps moving.',
     image:
       'https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1800&q=80',
     alt: 'Snowy mountain valley in daylight',
-    accent: 'from-sky-200/90 via-white/55 to-transparent',
-    surface: 'bg-[linear-gradient(180deg,rgba(255,255,255,0.22),rgba(226,240,255,0.58))]',
+    accent: 'from-white/45 via-sky-200/25 to-transparent',
+    surface: 'from-slate-900/10 via-slate-900/30 to-slate-950/78',
     icon: MountainSnow,
-    speed: -0.08,
+    speed: -0.1,
+    align: 'items-center text-center',
   },
   {
     id: 'summer',
-    label: 'Golden bloom',
-    season: 'Summer release',
-    title: 'The ending opens into warmth, scale, and golden highlights like the final shot of a glossy 4K campaign film.',
-    text: 'Soft lens glow, brighter air, and cleaner typography make the payoff feel elevated while the motion continues underneath.',
+    kicker: 'Act III · Release',
+    season: 'Summer',
+    title: 'Finish with warmer light, cleaner spacing, and a final frame that feels modern instead of busy.',
+    text: 'The payoff stays minimal—big type, sparse metadata, and panoramic movement—so the whole landing page reads like one uninterrupted trailer.',
     image:
       'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=80',
     alt: 'Sunny landscape with lake and mountains',
-    accent: 'from-amber-300/80 via-orange-200/35 to-transparent',
-    surface: 'bg-[linear-gradient(180deg,rgba(255,248,235,0.18),rgba(253,240,210,0.6))]',
+    accent: 'from-amber-200/45 via-orange-200/20 to-transparent',
+    surface: 'from-slate-900/8 via-slate-900/24 to-slate-950/80',
     icon: SunMedium,
-    speed: 0.07,
+    speed: 0.1,
+    align: 'items-end text-right',
   },
 ]
 
-const serviceBands = [
+const notes = [
   {
-    title: 'No boxed cards',
-    text: 'Information now lives in flowing editorial bands and cinematic overlays instead of stacked card grids.',
+    title: 'No cards anywhere',
+    text: 'Copy is presented as captions, side notes, and scene markers directly on the canvas.',
     icon: Compass,
   },
   {
-    title: 'Heavier motion language',
-    text: 'Layered blur, scrolling transforms, and fades make every section feel more alive and filmic.',
+    title: 'Stronger parallax',
+    text: 'Foreground glows, image planes, and text all move on separate speeds to sell depth.',
     icon: Clapperboard,
   },
   {
-    title: '4K hero energy',
-    text: 'Large type, panoramic imagery, and controlled glow create a cleaner premium landing-page mood.',
+    title: 'Modern minimal finish',
+    text: 'The interface strips back chrome so the motion, type, and rhythm do most of the work.',
     icon: Sparkles,
   },
 ]
@@ -86,51 +89,69 @@ function parallaxStyle(scrollY, speed = 0, scale = 1) {
   }
 }
 
-function getSeasonProgress(progress, index) {
-  const start = index / (transitions.length - 1)
+function getSceneProgress(progress, index) {
+  const start = index / (scenes.length - 1)
   const distance = Math.abs(progress - start)
-  return clamp(1 - distance * 2.1)
+  return clamp(1 - distance * 2)
 }
 
-function StoryRail({ item, index, progress, scrollY }) {
+function SceneSection({ item, index, scrollY, pageProgress }) {
   const Icon = item.icon
-  const emphasis = getSeasonProgress(progress, index)
+  const emphasis = getSceneProgress(pageProgress, index)
 
   return (
-    <article
-      id={item.id}
-      className="story-rail relative overflow-hidden rounded-[36px] border border-white/10 px-6 py-7 md:px-8 md:py-8"
-      style={{
-        transform: `translate3d(0, ${Math.round((0.5 - emphasis) * 28)}px, 0) scale(${0.98 + emphasis * 0.04})`,
-        opacity: 0.48 + emphasis * 0.52,
-      }}
-    >
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-35"
-        style={{
-          backgroundImage: `url('${item.image}')`,
-          ...parallaxStyle(scrollY, item.speed * 0.7, 1.08 + emphasis * 0.04),
-        }}
-      />
-      <div className={`absolute inset-0 ${item.surface}`} />
-      <div className={`absolute inset-0 bg-gradient-to-r ${item.accent} opacity-80`} />
-      <div className="absolute inset-y-0 left-0 w-px bg-white/14" />
+    <section id={item.id} className="scene-section relative min-h-[115vh] overflow-hidden">
+      <div className="scene-sticky flex min-h-screen items-center py-16">
+        <div
+          className="scene-image absolute inset-[-8%] bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${item.image}')`,
+            transform: `translate3d(0, ${Math.round(scrollY * item.speed)}px, 0) scale(${1.14 + emphasis * 0.06})`,
+          }}
+        />
+        <div className={`absolute inset-0 bg-gradient-to-b ${item.surface}`} />
+        <div className={`absolute inset-0 bg-gradient-to-r ${item.accent}`} style={{ opacity: 0.36 + emphasis * 0.4 }} />
+        <div className="scene-grain absolute inset-0 opacity-40" />
+        <div className="scene-beam absolute left-[8%] top-[18%] h-48 w-48 rounded-full bg-cyan-200/15 blur-3xl" style={parallaxStyle(scrollY, 0.05 + index * 0.03, 1.08)} />
+        <div className="scene-beam absolute right-[10%] bottom-[18%] h-64 w-64 rounded-full bg-white/10 blur-3xl" style={parallaxStyle(scrollY, -0.04 - index * 0.025, 1.14)} />
 
-      <div className="relative z-10 grid gap-6 lg:grid-cols-[220px_1fr] lg:items-start">
-        <div>
-          <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 text-cyan-100 backdrop-blur-xl">
-            <Icon className="h-5 w-5" />
+        <div className="relative z-10 mx-auto flex w-full max-w-[1540px] flex-col px-4 sm:px-6 lg:px-8">
+          <div className={`flex min-h-[68vh] flex-col justify-between gap-14 ${item.align}`}>
+            <div
+              className="max-w-[14rem] text-[10px] font-semibold uppercase tracking-[0.5em] text-white/58"
+              style={{ letterSpacing: '0.5em', opacity: 0.45 + emphasis * 0.55 }}
+            >
+              {item.kicker}
+            </div>
+
+            <div
+              className={`scene-copy flex max-w-5xl flex-col gap-6 ${item.align}`}
+              style={{
+                transform: `translate3d(0, ${Math.round((0.5 - emphasis) * 46)}px, 0)`,
+                opacity: 0.38 + emphasis * 0.62,
+              }}
+            >
+              <div className="flex items-center gap-3 text-white/70">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 backdrop-blur-xl">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="text-xs uppercase tracking-[0.42em]">{item.season} scene</span>
+              </div>
+
+              <h2 className="max-w-5xl text-5xl font-black leading-[0.84] tracking-[-0.08em] text-white md:text-7xl xl:text-[6.4rem]">
+                {item.title}
+              </h2>
+              <p className="max-w-2xl text-base leading-8 text-white/72 md:text-xl md:leading-9">{item.text}</p>
+            </div>
+
+            <div className="scene-footer flex w-full items-end justify-between gap-8 border-t border-white/10 pt-6 text-white/60">
+              <div className="text-xs uppercase tracking-[0.35em]">Parallax index {String(index + 1).padStart(2, '0')}</div>
+              <div className="max-w-md text-sm leading-7 text-white/60">Open composition, cinematic transitions, and zero card framing.</div>
+            </div>
           </div>
-          <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.42em] text-white/55">{item.label}</p>
-          <h3 className="mt-3 text-2xl font-semibold text-white">{item.season}</h3>
-        </div>
-
-        <div>
-          <p className="max-w-3xl text-2xl font-semibold leading-[1.3] text-white md:text-[2rem]">{item.title}</p>
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 md:text-base md:leading-8">{item.text}</p>
         </div>
       </div>
-    </article>
+    </section>
   )
 }
 
@@ -162,36 +183,36 @@ export default function App() {
   }, [pageProgress])
 
   return (
-    <div className="relative overflow-hidden bg-[#030816] text-white">
-      <div className="season-canvas pointer-events-none fixed inset-0">
-        {transitions.map((item, index) => {
-          const intensity = getSeasonProgress(pageProgress, index)
+    <div className="relative overflow-x-hidden bg-[#030816] text-white">
+      <div className="pointer-events-none fixed inset-0">
+        {scenes.map((item, index) => {
+          const intensity = getSceneProgress(pageProgress, index)
           return (
-            <div key={item.id} className="absolute inset-0 transition-opacity duration-700" style={{ opacity: 0.16 + intensity * 0.84 }}>
+            <div key={item.id} className="absolute inset-0 transition-opacity duration-700" style={{ opacity: 0.14 + intensity * 0.72 }}>
               <div
                 className="absolute inset-[-6%] bg-cover bg-center"
                 style={{
                   backgroundImage: `url('${item.image}')`,
-                  transform: `translate3d(0, ${Math.round(scrollY * item.speed)}px, 0) scale(${1.16 + intensity * 0.05})`,
+                  transform: `translate3d(0, ${Math.round(scrollY * item.speed * 0.72)}px, 0) scale(${1.18 + intensity * 0.04})`,
                 }}
               />
-              <div className={`absolute inset-0 ${item.surface}`} />
-              <div className={`absolute inset-0 bg-gradient-to-br ${item.accent}`} />
+              <div className={`absolute inset-0 bg-gradient-to-b ${item.surface}`} />
+              <div className={`absolute inset-0 bg-gradient-to-r ${item.accent}`} style={{ opacity: 0.18 + intensity * 0.34 }} />
             </div>
           )
         })}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_22%),linear-gradient(180deg,rgba(3,8,22,0.28),rgba(3,8,22,0.8))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),transparent_18%),linear-gradient(180deg,rgba(3,8,22,0.25),rgba(3,8,22,0.88))]" />
       </div>
 
       <div className="page-aurora pointer-events-none absolute inset-0" />
-      <div className="grid-lines pointer-events-none absolute inset-0 opacity-40" />
+      <div className="grid-lines pointer-events-none absolute inset-0 opacity-30" />
       <div className="light-orbs pointer-events-none absolute inset-0" />
       <div className="cinema-vignette pointer-events-none fixed inset-0" />
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-[1540px] flex-col px-4 pb-24 sm:px-6 lg:px-8">
-        <header className="sticky top-5 z-50 mt-5 flex flex-col gap-4 rounded-full border border-white/10 bg-slate-950/45 px-6 py-4 shadow-[0_24px_80px_rgba(2,6,23,0.48)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
-          <a href="#top" className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-cyan-300/35 bg-white/10 text-sm font-black tracking-[0.35em] text-cyan-100 shadow-[0_0_30px_rgba(125,211,252,0.35)]">
+      <header className="fixed inset-x-0 top-0 z-50">
+        <div className="mx-auto flex w-full max-w-[1540px] items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
+          <a href="#top" className="flex items-center gap-3 mix-blend-screen">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-black tracking-[0.35em] text-cyan-100 backdrop-blur-xl">
               F
             </span>
             <span className="flex flex-col leading-none">
@@ -200,201 +221,135 @@ export default function App() {
             </span>
           </a>
 
-          <nav className="flex flex-wrap gap-5 text-sm text-white/62 sm:gap-6">
+          <nav className="hidden gap-6 text-xs uppercase tracking-[0.35em] text-white/58 md:flex">
             <a href="#experience" className="transition hover:text-white">Experience</a>
             <a href="#story" className="transition hover:text-white">Story</a>
             <a href="#contact" className="transition hover:text-white">Contact</a>
           </nav>
-        </header>
+        </div>
+      </header>
 
-        <main id="top" className="space-y-10 pt-10 md:space-y-14 md:pt-14">
-          <section className="hero-shell relative min-h-[calc(100vh-8rem)] overflow-hidden rounded-[44px] border border-white/10 px-6 py-10 md:px-10 md:py-12">
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,8,22,0.1),rgba(3,8,22,0.56))]" />
-            <div className="hero-beam absolute -left-16 top-20 h-56 w-56 rounded-full bg-cyan-300/20 blur-3xl" style={parallaxStyle(scrollY, 0.08, 1.04)} />
-            <div className="hero-beam absolute right-0 top-8 h-72 w-72 rounded-full bg-fuchsia-500/14 blur-3xl" style={parallaxStyle(scrollY, -0.1, 1.08)} />
-            <div className="hero-beam absolute bottom-10 left-[30%] h-48 w-48 rounded-full bg-amber-300/12 blur-3xl" style={parallaxStyle(scrollY, -0.05, 1.06)} />
+      <main id="top" className="relative">
+        <section className="hero-film relative flex min-h-screen items-end overflow-hidden px-4 pb-14 pt-28 sm:px-6 lg:px-8">
+          <div className="hero-beam absolute left-[5%] top-[18%] h-72 w-72 rounded-full bg-cyan-300/18 blur-3xl" style={parallaxStyle(scrollY, 0.08, 1.04)} />
+          <div className="hero-beam absolute right-[6%] top-[12%] h-80 w-80 rounded-full bg-fuchsia-500/12 blur-3xl" style={parallaxStyle(scrollY, -0.12, 1.08)} />
+          <div className="hero-beam absolute bottom-[14%] left-[32%] h-64 w-64 rounded-full bg-amber-300/12 blur-3xl" style={parallaxStyle(scrollY, -0.05, 1.06)} />
 
-            <div className="relative z-10 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
-              <div className="space-y-10">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.38em] text-cyan-100/90 backdrop-blur-xl">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  4K cinematic motion system
-                </div>
-
-                <div className="space-y-6">
-                  <h1 className="max-w-6xl text-5xl font-black leading-[0.82] tracking-[-0.08em] text-white sm:text-6xl lg:text-7xl xl:text-[6.4rem]">
-                    No more cards. Just a cleaner, more modern scroll film with stronger transitions and deeper parallax.
-                  </h1>
-                  <p className="max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
-                    The layout now reads like a premium editorial trailer: oversized typography, floating status lines, and immersive scene changes that feel closer to a glossy movie landing page than a boxed website.
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-3">
-                  <a href="#experience">
-                    <Button className="gap-2 bg-white text-slate-950 hover:bg-cyan-50">
-                      Explore the motion
-                      <ArrowUpRight className="h-4 w-4" />
-                    </Button>
-                  </a>
-                  <a href="#contact">
-                    <Button variant="secondary" className="border border-white/15 bg-white/10 text-white hover:bg-white/20">
-                      Launch a project
-                    </Button>
-                  </a>
-                </div>
+          <div className="relative z-10 mx-auto grid w-full max-w-[1540px] gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.38em] text-cyan-100/88">
+                <Sparkles className="h-3.5 w-3.5" />
+                Full-screen motion direction
               </div>
 
-              <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.045] p-6 shadow-[0_30px_120px_rgba(2,6,23,0.42)] backdrop-blur-2xl">
-                <div className="absolute inset-0 gradient-web opacity-75" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(125,211,252,0.14),transparent_22%),radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.12),transparent_24%)]" />
-
-                <div className="relative z-10 space-y-10">
-                  <div className="flex items-start justify-between gap-6 border-b border-white/10 pb-6">
-                    <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-white/55">Live season status</p>
-                      <p className="mt-4 text-3xl font-semibold text-white md:text-4xl">{activeSeason} blend in focus</p>
-                    </div>
-                    <div className="mt-3 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_22px_rgba(103,232,249,0.85)]" />
-                  </div>
-
-                  <div className="space-y-6">
-                    {serviceBands.map((service, index) => {
-                      const Icon = service.icon
-                      return (
-                        <div
-                          key={service.title}
-                          className="service-band relative border-l border-white/12 pl-6"
-                          style={parallaxStyle(scrollY, 0.02 + index * 0.02, 1)}
-                        >
-                          <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-cyan-100">
-                            <Icon className="h-5 w-5" />
-                          </div>
-                          <h2 className="text-2xl font-semibold text-white">{service.title}</h2>
-                          <p className="mt-3 max-w-md text-sm leading-7 text-white/68">{service.text}</p>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="experience" className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
-            <div className="editorial-panel rounded-[36px] border border-white/10 px-8 py-10 backdrop-blur-2xl" style={parallaxStyle(scrollY, -0.05, 1)}>
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-100/70">Transition direction</p>
-              <h2 className="mt-5 text-4xl font-black leading-[0.94] tracking-[-0.06em] text-white md:text-5xl">
-                Information is now presented as cinematic copy bands, not repeating feature cards.
-              </h2>
-              <p className="mt-5 max-w-xl text-base leading-8 text-white/70">
-                Every content block sits inside a softer panoramic shell with richer transparency, longer fades, and smoother scroll reactions to sell the high-end movie feeling.
+              <h1 className="max-w-6xl text-6xl font-black leading-[0.8] tracking-[-0.09em] text-white sm:text-7xl lg:text-[7rem] xl:text-[8.6rem]">
+                Crazy parallax. No cards. A modern minimal landing page that moves like a film.
+              </h1>
+              <p className="max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
+                The whole page now behaves like a cinematic sequence—open compositions, layered motion, and clean typography instead of stacked panels pretending to be premium.
               </p>
+
+              <div className="flex flex-wrap gap-3 pt-4">
+                <a href="#experience">
+                  <Button className="gap-2 bg-white text-slate-950 hover:bg-cyan-50">
+                    Watch the scroll
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Button>
+                </a>
+                <a href="#contact">
+                  <Button variant="secondary" className="border border-white/15 bg-white/10 text-white hover:bg-white/20">
+                    Start a project
+                  </Button>
+                </a>
+              </div>
             </div>
 
-            <div className="space-y-4">
-              {transitions.map((item, index) => {
-                const emphasis = getSeasonProgress(pageProgress, index)
-                const Icon = item.icon
-                return (
-                  <div
-                    key={item.id}
-                    className="panorama-strip relative overflow-hidden rounded-[32px] border border-white/10 px-6 py-6 md:px-8"
-                    style={{
-                      transform: `translate3d(0, ${Math.round((0.5 - emphasis) * 22)}px, 0) scale(${0.98 + emphasis * 0.04})`,
-                      opacity: 0.55 + emphasis * 0.45,
-                    }}
-                  >
-                    <div
-                      className="absolute inset-0 bg-cover bg-center opacity-30"
-                      style={{
-                        backgroundImage: `url('${item.image}')`,
-                        ...parallaxStyle(scrollY, item.speed * 0.6, 1.08),
-                      }}
-                    />
-                    <div className={`absolute inset-0 ${item.surface}`} />
-                    <div className={`absolute inset-0 bg-gradient-to-r ${item.accent}`} />
-                    <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-10 lg:items-end lg:text-right">
+              <div className="hero-meta max-w-sm border-t border-white/12 pt-6">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.5em] text-white/46">Current scene</p>
+                <p className="mt-4 text-3xl font-semibold text-white md:text-4xl">{activeSeason} blend in focus</p>
+                <p className="mt-4 text-sm leading-7 text-white/60">Big-image transitions, restrained glass, and more negative space give the page a trailer-like calm even when the motion gets dramatic.</p>
+              </div>
+
+              <div className="grid max-w-xl gap-8 md:grid-cols-3 lg:grid-cols-1">
+                {notes.map((note, index) => {
+                  const Icon = note.icon
+                  return (
+                    <div key={note.title} className="flex gap-4 border-t border-white/10 pt-5" style={parallaxStyle(scrollY, 0.025 + index * 0.018, 1)}>
+                      <span className="mt-1 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-cyan-100 backdrop-blur-xl">
+                        <Icon className="h-4 w-4" />
+                      </span>
                       <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-white/55">{item.label}</p>
-                        <h3 className="mt-3 text-3xl font-semibold text-white">{item.season}</h3>
-                      </div>
-                      <div className="flex items-center gap-3 text-cyan-100/90">
-                        <Icon className="h-5 w-5" />
-                        <span className="text-sm uppercase tracking-[0.3em]">Scene in motion</span>
+                        <h2 className="text-lg font-semibold text-white">{note.title}</h2>
+                        <p className="mt-2 text-sm leading-7 text-white/62">{note.text}</p>
                       </div>
                     </div>
-                    <p className="relative z-10 mt-5 max-w-3xl text-base leading-8 text-white/78">{item.text}</p>
-                  </div>
-                )
-              })}
-            </div>
-          </section>
-
-          <section id="story" className="relative overflow-hidden rounded-[42px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-6 py-8 shadow-[0_30px_120px_rgba(2,6,23,0.3)] backdrop-blur-xl md:px-10 md:py-10">
-            <div className="absolute inset-y-0 left-[calc(50%-1px)] hidden w-px bg-white/8 lg:block" />
-            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-              <div className="lg:sticky lg:top-28 lg:self-start">
-                <p className="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-100/70">Scroll story</p>
-                <h2 className="mt-5 text-4xl font-black leading-[0.94] tracking-[-0.06em] text-white md:text-5xl">
-                  One uninterrupted cinematic canvas with bigger atmosphere and more depth cues.
-                </h2>
-                <p className="mt-5 max-w-xl text-base leading-8 text-white/70">
-                  The storytelling remains structured, but the visual system now behaves like a parallax film sequence with layered motion, softer framing, and more premium rhythm.
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                {transitions.map((item, index) => (
-                  <StoryRail key={item.id} item={item} index={index} progress={pageProgress} scrollY={scrollY} />
-                ))}
+                  )
+                })}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section id="contact">
-            <div className="editorial-panel relative overflow-hidden rounded-[40px] border border-white/10 p-8 shadow-[0_28px_110px_rgba(2,6,23,0.35)] lg:p-10">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.18),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(251,191,36,0.16),transparent_24%)]" />
-              <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-                <div className="space-y-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-100/70">Contact</p>
-                  <h2 className="max-w-3xl text-4xl font-black leading-[0.95] tracking-[-0.06em] text-white md:text-5xl">
-                    Ready to make Flash Studio feel less like a website and more like a modern motion trailer?
-                  </h2>
-                  <p className="max-w-2xl text-base leading-8 text-white/68">
-                    This new direction keeps the page immersive from top to bottom, replacing boxed presentation with fluid storytelling, richer transitions, and stronger 4K-style polish.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    <a href="mailto:post@flashstudio.no">
-                      <Button className="bg-white text-slate-950 hover:bg-cyan-50">post@flashstudio.no</Button>
-                    </a>
-                    <a href="#top">
-                      <Button variant="secondary" className="border border-white/15 bg-white/10 text-white hover:bg-white/20">
-                        Back to top
-                      </Button>
-                    </a>
-                  </div>
-                </div>
+        <section id="experience" className="relative px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mx-auto flex w-full max-w-[1540px] flex-col gap-10 border-y border-white/10 py-12 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-4xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-100/68">Experience</p>
+              <h2 className="mt-5 text-4xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-6xl">
+                Remove the card grid and let the content live directly inside the motion system.
+              </h2>
+            </div>
+            <p className="max-w-xl text-base leading-8 text-white/64">
+              This direction keeps the layout minimal, but it feels bigger because every caption, marker, and transition sits on the same cinematic canvas.
+            </p>
+          </div>
+        </section>
 
-                <div className="contact-rail max-w-sm border-l border-white/12 pl-6 text-sm leading-7 text-white/68">
-                  <div className="font-semibold text-white">Flash Studio AS</div>
-                  <div>Eyvind Lychesvei 6 · 1338 Sandvika</div>
-                  <div>+47 908 91 863</div>
-                  <div className="flex items-center gap-2 pt-3 text-cyan-100">
-                    <Trees className="h-4 w-4" /> Continuous night-to-winter-to-summer transition
-                  </div>
-                  <div className="mt-3 flex items-center gap-2 text-white/58">
-                    <MapPin className="h-4 w-4" /> Norwegian storytelling with more drama, contrast, and motion
-                  </div>
-                  <div className="mt-2 flex items-center gap-2 text-white/58">
-                    <Waves className="h-4 w-4" /> Built for wow-factor brand presentations and campaign intros
-                  </div>
-                </div>
+        <section id="story" className="relative">
+          {scenes.map((item, index) => (
+            <SceneSection key={item.id} item={item} index={index} scrollY={scrollY} pageProgress={pageProgress} />
+          ))}
+        </section>
+
+        <section id="contact" className="relative px-4 py-24 sm:px-6 lg:px-8">
+          <div className="mx-auto flex w-full max-w-[1540px] flex-col gap-14 border-t border-white/10 pt-12 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-4xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-100/68">Contact</p>
+              <h2 className="mt-5 text-4xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-6xl">
+                Ready to make Flash Studio feel like a modern motion trailer instead of a boxed landing page?
+              </h2>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/66">
+                The new direction pushes atmosphere, pacing, and parallax harder while keeping the interface minimal enough to feel current.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="mailto:post@flashstudio.no">
+                  <Button className="bg-white text-slate-950 hover:bg-cyan-50">post@flashstudio.no</Button>
+                </a>
+                <a href="#top">
+                  <Button variant="secondary" className="border border-white/15 bg-white/10 text-white hover:bg-white/20">
+                    Back to top
+                  </Button>
+                </a>
               </div>
             </div>
-          </section>
-        </main>
-      </div>
+
+            <div className="max-w-md space-y-4 text-sm leading-7 text-white/60 lg:text-right">
+              <div className="flex items-center gap-3 lg:justify-end">
+                <MapPin className="h-4 w-4 text-cyan-100" />
+                <span>Eyvind Lychesvei 6 · 1338 Sandvika</span>
+              </div>
+              <div className="flex items-center gap-3 lg:justify-end">
+                <Trees className="h-4 w-4 text-cyan-100" />
+                <span>Continuous night-to-winter-to-summer flow</span>
+              </div>
+              <div className="flex items-center gap-3 lg:justify-end">
+                <Waves className="h-4 w-4 text-cyan-100" />
+                <span>Minimal framing, dramatic depth, premium pacing</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }
