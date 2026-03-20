@@ -11,44 +11,17 @@ html {
 }
 
 body {
-  @apply bg-background text-foreground font-sans antialiased;
-  background:
-    radial-gradient(circle at top, rgba(15, 23, 42, 0.82), transparent 22%),
-    radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.12), transparent 18%),
-    radial-gradient(circle at 82% 12%, rgba(217, 70, 239, 0.12), transparent 22%),
-    linear-gradient(180deg, #030816 0%, #07111f 42%, #0a1d2f 100%);
-  color: #f8fafc;
+  @apply font-sans antialiased;
   min-height: 100vh;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
   background:
-    radial-gradient(circle at 10% 10%, rgba(125, 211, 252, 0.08), transparent 16%),
-    radial-gradient(circle at 90% 18%, rgba(251, 191, 36, 0.05), transparent 18%),
-    radial-gradient(circle at 50% 50%, transparent 48%, rgba(15, 23, 42, 0.24));
-  mix-blend-mode: screen;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 130px 130px;
-  mask-image: radial-gradient(circle at center, black, transparent 82%);
-  opacity: 0.14;
+    radial-gradient(circle at top left, rgba(197, 166, 110, 0.12), transparent 24%),
+    radial-gradient(circle at 80% 12%, rgba(133, 152, 176, 0.12), transparent 20%),
+    linear-gradient(180deg, #050505 0%, #0a0a0a 45%, #060606 100%);
+  color: #f5f1ea;
 }
 
 #root {
-  position: relative;
-  isolation: isolate;
+  min-height: 100vh;
 }
 
 img {
@@ -56,108 +29,101 @@ img {
   -webkit-user-drag: none;
 }
 
-.season-canvas,
-.hero-beam,
-.scene-image,
-.scene-copy,
-.scene-section,
-.hero-meta {
-  position: relative;
-  will-change: transform, opacity;
+.site-shell {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
 }
 
-.page-aurora {
-  background:
-    radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.16), transparent 22%),
-    radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.14), transparent 20%),
-    radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.1), transparent 24%);
-  filter: blur(10px);
+.ambient,
+.film-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
 }
 
-.grid-lines {
+.ambient-left {
+  background: radial-gradient(circle at 12% 18%, rgba(173, 139, 88, 0.16), transparent 24%);
+  filter: blur(40px);
+}
+
+.ambient-right {
+  background: radial-gradient(circle at 84% 14%, rgba(122, 138, 154, 0.16), transparent 22%);
+  filter: blur(44px);
+}
+
+.film-grain {
+  opacity: 0.12;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 90px 90px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.86), transparent 92%);
-}
-
-.light-orbs {
-  background:
-    radial-gradient(circle at 12% 22%, rgba(103, 232, 249, 0.08), transparent 12%),
-    radial-gradient(circle at 78% 18%, rgba(192, 132, 252, 0.08), transparent 14%),
-    radial-gradient(circle at 72% 78%, rgba(251, 191, 36, 0.09), transparent 14%);
-  animation: pulse-drift 16s ease-in-out infinite alternate;
-}
-
-.cinema-vignette {
-  background:
-    radial-gradient(circle at center, transparent 48%, rgba(2, 6, 23, 0.2) 72%, rgba(2, 6, 23, 0.56) 100%),
-    linear-gradient(180deg, rgba(2, 6, 23, 0.44), transparent 16%, transparent 84%, rgba(2, 6, 23, 0.5));
-}
-
-.hero-film {
-  box-shadow: inset 0 -120px 120px rgba(2, 6, 23, 0.18);
-}
-
-.scene-section + .scene-section {
-  margin-top: -12vh;
-}
-
-.scene-sticky {
-  position: sticky;
-  top: 0;
-}
-
-.scene-grain {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 4px 4px, 6px 6px;
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px, 4px 4px;
   mix-blend-mode: soft-light;
 }
 
-.scene-footer {
-  backdrop-filter: blur(12px);
+.hero-section {
+  position: relative;
 }
 
-@keyframes pulse-drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  100% {
-    transform: translate3d(0, -2%, 0) scale(1.06);
-  }
+.hero-frame {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
 }
 
-@media (max-width: 1023px) {
-  .scene-section + .scene-section {
-    margin-top: -4vh;
+.hero-image {
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.1), rgba(5, 5, 5, 0.52)),
+    url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80') center/cover;
+}
+
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 70% 22%, rgba(215, 180, 120, 0.22), transparent 18%),
+    linear-gradient(180deg, rgba(3, 3, 3, 0.02), rgba(3, 3, 3, 0.58));
+}
+
+.project-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.project-image {
+  min-height: 280px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-image-1 {
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.46)),
+    url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80');
+}
+
+.project-image-2 {
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.48)),
+    url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80');
+}
+
+.project-image-3 {
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.48)),
+    url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80');
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    min-height: 380px;
   }
 
-  .scene-footer {
-    flex-direction: column;
-    align-items: flex-start;
+  .project-image {
+    min-height: 220px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .scene-sticky {
-    position: relative;
-  }
-
-  .scene-section + .scene-section {
-    margin-top: 0;
   }
 }
