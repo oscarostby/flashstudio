@@ -47,6 +47,12 @@ const metrics = [
   ['Based in', 'Sandvika, Norway'],
 ]
 
+const depthNotes = [
+  'Foreground copy stays clean while the image plane drifts behind it.',
+  'Fixed image treatments create depth without throwing more content on screen.',
+  'Sections now breathe with slower, more cinematic movement cues.',
+]
+
 export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] text-white">
@@ -54,6 +60,9 @@ export default function App() {
         <div className="ambient ambient-left" />
         <div className="ambient ambient-right" />
         <div className="film-grain" />
+        <div className="parallax-layer parallax-layer-one" />
+        <div className="parallax-layer parallax-layer-two" />
+        <div className="parallax-layer parallax-layer-three" />
 
         <header className="relative z-20 border-b border-white/10">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-12">
@@ -76,7 +85,7 @@ export default function App() {
         </header>
 
         <main id="top" className="relative z-10">
-          <section className="hero-section px-5 pb-20 pt-16 sm:px-8 lg:px-12 lg:pb-28 lg:pt-24">
+          <section className="hero-section parallax-section px-5 pb-20 pt-16 sm:px-8 lg:px-12 lg:pb-28 lg:pt-24">
             <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
               <div className="space-y-8">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.35em] text-white/70">
@@ -90,7 +99,7 @@ export default function App() {
                     We create films and photographs that feel like still frames from a movie.
                   </h1>
                   <p className="max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
-                    Flash Studio is a visual media company focused on photography, short films, and branded storytelling with a restrained cinematic look. Less clutter, stronger imagery, and a sharper emotional tone.
+                    Flash Studio is a visual media company focused on photography, short films, and branded storytelling with a restrained cinematic look. Less clutter, stronger imagery, and a deeper sense of motion through parallax.
                   </p>
                 </div>
 
@@ -109,7 +118,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="hero-frame rounded-[2rem] border border-white/10 p-5 sm:p-7">
+              <div className="hero-frame hero-parallax-card rounded-[2rem] border border-white/10 p-5 sm:p-7">
                 <div className="hero-image relative overflow-hidden rounded-[1.6rem] border border-white/10">
                   <div className="hero-image-overlay" />
                   <div className="relative flex min-h-[460px] flex-col justify-between p-6 sm:p-8">
@@ -137,12 +146,23 @@ export default function App() {
                 </div>
               </div>
             </div>
+
+            <div className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-3">
+              {depthNotes.map((note, index) => (
+                <div
+                  key={note}
+                  className={`depth-panel depth-panel-${index + 1} rounded-[1.6rem] border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-white/62 backdrop-blur-sm`}
+                >
+                  {note}
+                </div>
+              ))}
+            </div>
           </section>
 
-          <section id="services" className="px-5 py-20 sm:px-8 lg:px-12">
+          <section id="services" className="parallax-section px-5 py-20 sm:px-8 lg:px-12">
             <div className="mx-auto max-w-7xl border-t border-white/10 pt-10">
               <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-                <div className="space-y-4">
+                <div className="space-y-4 lg:sticky lg:top-24">
                   <p className="text-xs uppercase tracking-[0.4em] text-white/45">Services</p>
                   <h2 className="text-3xl font-medium leading-tight tracking-[-0.04em] text-white sm:text-5xl">
                     Built for brands and people who want a cleaner, more cinematic visual identity.
@@ -154,7 +174,7 @@ export default function App() {
                     const icons = [Camera, Clapperboard, Film]
                     const Icon = icons[index]
                     return (
-                      <article key={service.title} className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+                      <article key={service.title} className="service-panel rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
                         <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80">
                           <Icon className="h-5 w-5" />
                         </span>
@@ -168,7 +188,7 @@ export default function App() {
             </div>
           </section>
 
-          <section id="work" className="px-5 py-20 sm:px-8 lg:px-12">
+          <section id="work" className="parallax-section px-5 py-20 sm:px-8 lg:px-12">
             <div className="mx-auto max-w-7xl border-t border-white/10 pt-10">
               <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                 <div>
@@ -178,11 +198,11 @@ export default function App() {
                   </h2>
                 </div>
                 <p className="max-w-xl text-sm leading-7 text-white/62 sm:text-base">
-                  The new direction strips out the noisy, buggy feeling and replaces it with a calmer visual rhythm: bold typography, cinematic gradients, and clearer content about what Flash Studio actually does.
+                  The new direction strips out the noisy, buggy feeling and replaces it with a calmer visual rhythm: bold typography, cinematic gradients, and fixed image planes that add much stronger parallax depth.
                 </p>
               </div>
 
-              <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              <div className="parallax-gallery mt-12 grid gap-6 lg:grid-cols-3">
                 {projects.map((project, index) => (
                   <article key={project.name} className="project-panel overflow-hidden rounded-[2rem] border border-white/10">
                     <div className={`project-image project-image-${index + 1}`} />
@@ -197,7 +217,7 @@ export default function App() {
             </div>
           </section>
 
-          <section id="contact" className="px-5 pb-24 pt-20 sm:px-8 lg:px-12">
+          <section id="contact" className="parallax-section px-5 pb-24 pt-20 sm:px-8 lg:px-12">
             <div className="mx-auto grid max-w-7xl gap-10 border-t border-white/10 pt-10 lg:grid-cols-[1fr_auto] lg:items-end">
               <div className="space-y-5">
                 <p className="text-xs uppercase tracking-[0.4em] text-white/45">Contact</p>
